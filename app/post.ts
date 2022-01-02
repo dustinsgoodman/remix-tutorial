@@ -38,6 +38,15 @@ export async function getPosts() {
   );
 };
 
+export async function createPost(post) {
+  const md = `---\ntitle: ${post.title}\n---\n\n${post.markdown}`;
+  await fs.writeFile(
+    path.join(postsPath, `${post.slug}.md`),
+    md
+  );
+  return getPost(post.slug);
+}
+
 export async function getPost(slug: string) {
   const filepath = path.join(postsPath, `${slug}.md`);
   const file = await fs.readFile(filepath);
