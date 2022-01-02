@@ -7,13 +7,8 @@ import { marked } from 'marked';
 export type Post = {
   slug: string;
   title: string;
-};
-
-export type NewPost = {
-  title: string;
-  slug: string;
   markdown: string;
-}
+};
 
 export type PostMarkdownAttributes = {
   title: string;
@@ -44,7 +39,7 @@ export async function getPosts() {
   );
 };
 
-export async function createPost(post: NewPost) {
+export async function createPost(post: Post) {
   const md = `---\ntitle: ${post.title}\n---\n\n${post.markdown}`;
   await fs.writeFile(
     path.join(postsPath, `${post.slug}.md`),
@@ -62,5 +57,14 @@ export async function getPost(slug: string) {
     `Post ${filepath} is missing attributes!`
   );
   const html = marked(body);
-  return { slug, html, title: attributes.title };
+  return { slug, html, markdown: body, title: attributes.title };
+}
+
+export async function updatePost(post: Post) {
+  const md = `---\ntitle: ${post.title}\n---\n\n${post.markdown}`;
+  await fs.writeFile(
+    path.join(postsPath, `${post.slug}.md`),
+    md
+  );
+  return getPost(post.slug);
 }

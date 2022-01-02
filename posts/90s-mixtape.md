@@ -21,3 +21,4 @@ title: 90s Mixtape
 - Scar Tissue (Red Hot Chili Peppers)
 - Santa Monica (Everclear)
 - C'mon N' Ride it (Quad City DJ's)
+- Smells Like Teen Spirit (Nirvana)
