@@ -9,6 +9,12 @@ export type Post = {
   title: string;
 };
 
+export type NewPost = {
+  title: string;
+  slug: string;
+  markdown: string;
+}
+
 export type PostMarkdownAttributes = {
   title: string;
 };
@@ -38,7 +44,7 @@ export async function getPosts() {
   );
 };
 
-export async function createPost(post) {
+export async function createPost(post: NewPost) {
   const md = `---\ntitle: ${post.title}\n---\n\n${post.markdown}`;
   await fs.writeFile(
     path.join(postsPath, `${post.slug}.md`),
